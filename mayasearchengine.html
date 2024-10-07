@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAYA Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .search-container {
+            margin-top: 100px;
+        }
+        input[type="text"] {
+            width: 50%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .gcse-searchresults-only {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <h1>MAYA Search Engine</h1>
+    <input type="text" id="searchInput" placeholder="Type something to search..." />
+    <button onclick="searchMaya()">Search</button>
+</div>
+
+<!-- Google's Custom Search Engine Script with updated ID -->
+<script async src="https://cse.google.com/cse.js?cx=558253e3b8a284368"></script>
+
+<div class="gcse-searchresults-only"></div>
+
+<script>
+    function searchMaya() {
+        const query = document.getElementById('searchInput').value;
+
+        // If no query is entered, alert the user
+        if (query === '') {
+            alert("Please enter a search term");
+            return;
+        }
+
+        // Wait for Google CSE to fully load, then set the value and trigger the search
+        setTimeout(() => {
+            const searchBox = document.querySelector('input.gsc-input');
+            const searchButton = document.querySelector('button.gsc-search-button');
+
+            if (searchBox && searchButton) {
+                // Set the input value in Google's search box
+                searchBox.value = query;
+
+                // Programmatically trigger the search button click
+                searchButton.click();
+            } else {
+                alert("Search is not ready yet. Please try again.");
+            }
+        }, 500); // Small delay to ensure CSE elements are loaded
+    }
+</script>
+
+</body>
+</html>
